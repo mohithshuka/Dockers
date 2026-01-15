@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Food Item{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-warning">
+                    <h4 class="mb-0">
+                        <i class="bi bi-pencil"></i> Edit Food Item
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('edit_food', food_id=food.id) }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Food Name *</label>
+                            <input type="text" class="form-control" id="name" 
+                                   name="name" value="{{ food.name }}" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category *</label>
+                            <select class="form-select" id="category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Pizza" {% if food.category == 'Pizza' %}selected{% endif %}>Pizza</option>
+                                <option value="Burger" {% if food.category == 'Burger' %}selected{% endif %}>Burger</option>
+                                <option value="Pasta" {% if food.category == 'Pasta' %}selected{% endif %}>Pasta</option>
+                                <option value="Salad" {% if food.category == 'Salad' %}selected{% endif %}>Salad</option>
+                                <option value="Appetizer" {% if food.category == 'Appetizer' %}selected{% endif %}>Appetizer</option>
+                                <option value="Dessert" {% if food.category == 'Dessert' %}selected{% endif %}>Dessert</option>
+                                <option value="Beverage" {% if food.category == 'Beverage' %}selected{% endif %}>Beverage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price (₹) *</label>
+                            <input type="number" class="form-control" id="price" 
+                                   name="price" step="0.01" min="0" value="{{ food.price }}" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" 
+                                      name="description" rows="3">{{ food.description }}</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image Filename</label>
+                            <input type="text" class="form-control" id="image" 
+                                   name="image" value="{{ food.image }}">
+                            <small class="text-muted">
+                                Place image in static/images/ folder (e.g., pizza.jpg)
+                            </small>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-warning flex-fill">
+                                <i class="bi bi-check-circle"></i> Update Food Item
+                            </button>
+                            <a href="{{ url_for('admin_dashboard') }}" 
+                               class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body text-center p-5">
+                    <div class="mb-4">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+                    </div>
+                    
+                    <h2 class="mb-3">Order Placed Successfully!</h2>
+                    <p class="lead text-muted mb-4">Thank you for your order</p>
+                    
+                    <div class="alert alert-info">
+                        <h5>Order #{{ order.id }}</h5>
+                        <p class="mb-0">Order Date: {{ order.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Order Details</h5>
+                        </div>
+                        <div class="card-body text-start">
+                            {% for item in order.order_items %}
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>{{ item.food_item.name }} x {{ item.quantity }}</span>
+                                <strong>₹{{ "%.2f"|format(item.price * item.quantity) }}</strong>
+                            </div>
+                            {% endfor %}
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <h5>Total Amount:</h5>
+                                <h5 class="text-success">₹{{ "%.2f"|format(order.total_amount) }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2 justify-content-center mt-4">
+                        <a href="{{ url_for('orders') }}" class="btn btn-primary">
+                            <i class="bi bi-clock-history"></i> View All Orders
+                        </a>
+                        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-house"></i> Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

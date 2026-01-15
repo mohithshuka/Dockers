@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./static:/app/static
+      - ./instance:/app/instance
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=change-this-to-random-secret-key
+    restart: unless-stopped
