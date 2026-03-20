@@ -42,7 +42,7 @@
 - MVC architecture with clean separation of concerns
 - SQLite database with SQLAlchemy ORM and relationships
 - Session-based authentication with custom decorators
-- Fully responsive Bootstrap UI (mobile, tablet, desktop)
+- Fully responsive Bootstrap UI (mobile, tablet, desktop).
 - Docker and Docker Compose ready for one-command deployment.
 
 ---
